@@ -10,26 +10,26 @@ namespace PassTest
         static void Main(string[] args)
         {
             Console.WriteLine("This password checker ranks a password based on character length, as well as number of special characters");
-            Console.WriteLine("");
             Console.WriteLine("Input A Password To Be Checked");
+            
+            //Get user Input
             var UserInput = Console.ReadLine();
             var SecurityCount = 0;
             Regex pattern = new Regex(@"\W|_");
-
+            
+            //Check length of input 
             if (UserInput.Length >=7)
             {
-                //SecurityCount--;
+                SecurityCount++;
                 
             } else
                 {
                 SecurityCount--;
                  }
 
-            if (UserInput.Length <7)
-            {
-                SecurityCount--;
-            }
+            
 
+            //Checks for the same 2 characters next to each other and outputs warning if needed
             for (int i = 0; i < UserInput.Length - 1; i++)
             {
                 if (UserInput[i] == UserInput[i + 1])
@@ -37,7 +37,8 @@ namespace PassTest
                     Console.WriteLine("WARNING: 2 characters of the same type should not be paired together in a password");
                 
             }
-
+            
+            //Checks for special characters
             string specialCharacters = @"%!@#$%^&*()?/>.<,:;'\|}]{[_~`+=-" + "\"";
             char[] specialCharactersArray = specialCharacters.ToCharArray();
             foreach (char c in specialCharactersArray)
@@ -45,10 +46,10 @@ namespace PassTest
                 if (UserInput.Contains(c))
                     SecurityCount++;
             }
-;
+            
+            //Outputs score
             Console.WriteLine("Your Security Score Out of 7 is: " + SecurityCount);
-            Console.WriteLine(" ");
-            Console.WriteLine("The more random the password, the better");
+            
 
 
         }
